@@ -1,0 +1,28 @@
+# Les 3 nœuds sur une seule VM Oracle Cloud (Always Free), derrière Caddy en HTTPS.
+# Remplacez 1.2.3.4 par l'IP publique de la VM dans Caddyfile et ci-dessous.
+#   cd deploy/oracle && docker compose up -d --build
+x-node: &node
+  build: ../..
+  restart: unless-stopped
+services:
+  node1:
+    <<: *node
+    environment: {NODE_NAME: noeud-1, MINING: "1", PUBLIC_URL: "https://n1.1-2-3-4.sslip.io",
+                  PEERS: "http://node2:8000,http://node3:8000", ADMIN_TOKEN: "${ADMIN_TOKEN}"}
+    volumes: [data1:/data]
+  node2:
+    <<: *node
+    environment: {NODE_NAME: noeud-2, MINING: "1", PUBLIC_URL: "https://n2.1-2-3-4.sslip.io",
+                  PEERS: "http://node1:8000,http://node3:8000", ADMIN_TOKEN: "${ADMIN_TOKEN}"}
+    volumes: [data2:/data]
+  node3:
+    <<: *node
+    environment: {NODE_NAME: noeud-3, MINING: "0", PUBLIC_URL: "https://n3.1-2-3-4.sslip.io",
+                  PEERS: "http://node1:8000,http://node2:8000", ADMIN_TOKEN: "${ADMIN_TOKEN}"}
+    volumes: [data3:/data]
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    ports: ["80:80", "443:443"]
+    volumes: [./Caddyfile:/etc/caddy/Caddyfile, caddy_data:/data]
+volumes: {data1: {}, data2: {}, data3: {}, caddy_data: {}}

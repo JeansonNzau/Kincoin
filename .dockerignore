@@ -1,0 +1,7 @@
+data/
+**/__pycache__
+.git
+tests/
+docs/
+*.json
+!frontend/**/*.json

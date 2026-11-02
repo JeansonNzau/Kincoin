@@ -1,0 +1,37 @@
+# Blueprint Render : crée les 3 nœuds en une fois (Dashboard > New > Blueprint).
+# Après la création, renseignez PEERS sur chaque service avec les URL réelles
+# des deux autres (Render peut ajouter un suffixe si le nom est déjà pris).
+# Pensez aussi à définir ADMIN_TOKEN et MINER_ADDRESS (adresse créée dans le portefeuille web).
+services:
+  - type: web
+    name: kincoin-node-1
+    runtime: docker
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - {key: NODE_NAME, value: noeud-1}
+      - {key: MINING, value: "1"}
+      - {key: PEERS, value: "https://kincoin-node-2.onrender.com,https://kincoin-node-3.onrender.com"}
+      - {key: ADMIN_TOKEN, generateValue: true}
+      - {key: MINER_ADDRESS, sync: false}
+  - type: web
+    name: kincoin-node-2
+    runtime: docker
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - {key: NODE_NAME, value: noeud-2}
+      - {key: MINING, value: "1"}
+      - {key: PEERS, value: "https://kincoin-node-1.onrender.com,https://kincoin-node-3.onrender.com"}
+      - {key: ADMIN_TOKEN, generateValue: true}
+      - {key: MINER_ADDRESS, sync: false}
+  - type: web
+    name: kincoin-node-3
+    runtime: docker
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - {key: NODE_NAME, value: noeud-3}
+      - {key: MINING, value: "0"}
+      - {key: PEERS, value: "https://kincoin-node-1.onrender.com,https://kincoin-node-2.onrender.com"}
+      - {key: ADMIN_TOKEN, generateValue: true}

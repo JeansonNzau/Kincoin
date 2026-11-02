@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KinCoin</title>
+  <meta name="description" content="Portefeuille et explorateur de blocs de KinCoin, une cryptomonnaie à preuve de travail.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231C3FAA'/%3E%3Cpath d='M10 7v18M10 16l9-9M13 14l7 11' stroke='%23fff' stroke-width='3.2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#/explorer" aria-label="KinCoin, accueil">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7"/><path d="M10 7v18M10 16l9-9M13 14l7 11"/></svg>
+      <span>KinCoin</span>
+    </a>
+    <nav class="tabs" aria-label="Sections">
+      <a href="#/explorer" data-tab="explorer">Explorateur</a>
+      <a href="#/wallet" data-tab="wallet">Portefeuille</a>
+    </nav>
+    <div class="node-pick">
+      <span class="dot" id="node-dot" aria-hidden="true"></span>
+      <label for="node-select" class="sr-only">Nœud utilisé</label>
+      <select id="node-select"></select>
+    </div>
+  </header>
+
+  <form class="search" id="search" role="search">
+    <label for="q" class="sr-only">Rechercher</label>
+    <input id="q" name="q" autocomplete="off" spellcheck="false"
+           placeholder="Rechercher une hauteur de bloc, un hash, une transaction ou une adresse">
+    <button type="submit">Rechercher</button>
+  </form>
+
+  <section class="chain-strip" aria-label="Derniers blocs de la chaîne">
+    <ol id="strip"></ol>
+  </section>
+
+  <main id="view" tabindex="-1"></main>
+
+  <footer class="foot">
+    <p>KinCoin — projet du groupe 01, Université de Kinshasa. Réseau de démonstration : les KIN n'ont aucune valeur.</p>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="config.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+# sslip.io transforme n1.1-2-3-4.sslip.io en 1.2.3.4 : pas besoin d'acheter un domaine,
+# et Caddy obtient automatiquement un certificat HTTPS (nécessaire pour le frontend Vercel).
+n1.1-2-3-4.sslip.io {
+	reverse_proxy node1:8000
+}
+n2.1-2-3-4.sslip.io {
+	reverse_proxy node2:8000
+}
+n3.1-2-3-4.sslip.io {
+	reverse_proxy node3:8000
+}

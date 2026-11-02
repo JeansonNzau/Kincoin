@@ -1,0 +1,41 @@
+# Réseau KinCoin complet en local : 3 nœuds reliés entre eux.
+#   docker compose up --build
+# Portefeuille et explorateur : http://localhost:8001/app/  (aussi sur 8002 et 8003)
+x-node: &node
+  build: .
+  restart: unless-stopped
+  environment: &env
+    P2P_TRANSPORT: ws
+    MINING: "1"
+
+services:
+  node1:
+    <<: *node
+    ports: ["8001:8000"]
+    environment:
+      <<: *env
+      NODE_NAME: noeud-1
+      PUBLIC_URL: http://node1:8000
+      PEERS: http://node2:8000,http://node3:8000
+    volumes: [data1:/data]
+  node2:
+    <<: *node
+    ports: ["8002:8000"]
+    environment:
+      <<: *env
+      NODE_NAME: noeud-2
+      PUBLIC_URL: http://node2:8000
+      PEERS: http://node1:8000,http://node3:8000
+    volumes: [data2:/data]
+  node3:
+    <<: *node
+    ports: ["8003:8000"]
+    environment:
+      <<: *env
+      NODE_NAME: noeud-3
+      PUBLIC_URL: http://node3:8000
+      PEERS: http://node1:8000,http://node2:8000
+      MINING: "0"          # nœud non mineur : il ne fait que valider et relayer
+    volumes: [data3:/data]
+
+volumes: {data1: {}, data2: {}, data3: {}}
