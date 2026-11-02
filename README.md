@@ -6,15 +6,6 @@ Cryptomonnaie à preuve de travail avec sa propre blockchain, codée par le grou
 
 > À compléter après le déploiement, puis à vérifier en navigation privée.
 
-| Élément | Lien |
-| --- | --- |
-| Application web (portefeuille + explorateur) | `https://__________.vercel.app` |
-| Nœud 1 (API) | `https://__________.onrender.com` |
-| Nœud 2 (API) | `https://__________.onrender.com` |
-| Nœud 3 (API) | `https://__________.onrender.com` |
-| Documentation de l'API | `https://<nœud 1>/docs` |
-| Dépôt du code | `https://github.com/__________/kincoin` |
-
 ## Membres du groupe 01
 
 - Akossa Dole Elvis
