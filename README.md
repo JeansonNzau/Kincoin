@@ -128,17 +128,6 @@ DATA_DIR=data/3 PUBLIC_URL=http://localhost:8003 PEERS=http://localhost:8001,htt
 | `DATA_DIR` | dossier de la chaîne | `./data` |
 | `FRONTEND_DIR` | sert le portefeuille sur `/app` | aucun |
 
-## Déploiement en ligne
-
-1. **Dépôt** : pousser ce dossier sur GitHub.
-2. **Nœuds sur Render** : *New* → *Blueprint*, choisir le dépôt ; `render.yaml` crée les trois nœuds. Corriger `PEERS` de chaque service avec les URL réelles des deux autres, et mettre `MINER_ADDRESS` du nœud 1 à l'adresse d'Alice. Conseil : un compte Render par membre (750 heures gratuites par compte et par mois). Variante stable : les trois nœuds sur une VM Oracle Cloud avec `deploy/oracle/` (HTTPS automatique par Caddy).
-3. **Interface sur Vercel** : remplacer dans `frontend/config.js` la liste des nœuds par leurs URL HTTPS :
-   ```js
-   window.KINCOIN_NODES = ["https://…-1.onrender.com", "https://…-2.onrender.com", "https://…-3.onrender.com"];
-   ```
-   puis *Add New* → *Project*, *Root Directory* = `frontend`.
-4. **Vérification** en navigation privée : l'application s'ouvre, le point en haut à droite est vert, « relié à 2 pairs », un bloc arrive toutes les 15 à 30 s, un envoi d'Alice vers Bob est confirmé.
-
 ## API REST documentée
 
 La documentation interactive est générée par FastAPI sur `/docs` de chaque nœud.
